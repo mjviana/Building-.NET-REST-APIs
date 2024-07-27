@@ -28,32 +28,7 @@ builder.Services.AddApiVersioning(options =>
 })
 .AddApiExplorer(options => options.GroupNameFormat = "'v'VVV");
 
-builder.Services.AddSwaggerGen(options =>
-                    {
-                        options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                        {
-                            In = ParameterLocation.Header,
-                            Description = "Please enter token",
-                            Name = "Authorization",
-                            Type = SecuritySchemeType.Http,
-                            BearerFormat = "JWT",
-                            Scheme = "bearer"
-                        });
-                        options.AddSecurityRequirement(new OpenApiSecurityRequirement
-                        {
-                            {
-                                new OpenApiSecurityScheme
-                                {
-                                    Reference = new OpenApiReference
-                                    {
-                                        Type=ReferenceType.SecurityScheme,
-                                        Id="Bearer"
-                                    }
-                                },
-                                new string[]{}
-                            }
-                        });
-                    })
+builder.Services.AddGameStoreSwaggerGen()
                 .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
                 .AddEndpointsApiExplorer();
 
