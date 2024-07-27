@@ -49,3 +49,5 @@ public record UpdateGameDto(
     [Url][StringLength(100)] string ImageUri
 );
 
+public record ImageUploadDto(string BlobUri);
+

@@ -31,3 +31,16 @@ dotnet user-secrets set "ConnectionStrings:GameStoreConnectionString" "Server=lo
 ```powershell
  dotnet ef database update
 ```
+
+## Setting the Azure Storage connection string to secret manager
+
+```powershell
+$storage_connection_string: "[STORAGE CONNECTION STRING HERE]" or storage_connection_string:"[STORAGE CONNECTION STRING HERE]" (if you are using ) Zsh
+dotnet user-secrets set "ConnectionStrings:AzureStorage" $storage_connection_string
+```
+
+## See your User Secrets
+
+```powershell
+dotnet user-secrets list
+```

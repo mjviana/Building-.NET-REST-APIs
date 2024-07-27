@@ -1,8 +1,10 @@
+using Azure.Storage.Blobs;
 using GameStore.Api.Authorization;
 using GameStore.Api.Cors;
 using GameStore.Api.Data;
 using GameStore.Api.Endpoints;
 using GameStore.Api.ErrorHandling;
+using GameStore.Api.ImageUpload;
 using GameStore.Api.Middleware;
 using GameStore.Api.OpenApi;
 using Microsoft.Extensions.Options;
@@ -57,7 +59,20 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddGameStoreCors(builder.Configuration);
 
+builder.Services.AddSingleton<IImageUploader>(
+    new ImageUploader(
+        new BlobContainerClient(
+            builder.Configuration.GetConnectionString("AzureStorage"),
+            "images"
+        )
+    )
+);
+
+builder.Services.AddAntiforgery();
+
 var app = builder.Build();
+
+app.UseAntiforgery();
 
 app.UseExceptionHandler(exceptionHandlerApp => exceptionHandlerApp.ConfigureExceptionHandler());
 app.UseMiddleware<RequestTimingMiddleware>();
@@ -66,6 +81,8 @@ await app.Services.InitializeDbAsync();
 
 app.UseHttpLogging();
 app.MapGamesEndpoints();
+app.MapImagesEndpoints();
+
 app.UseCors();
 
 app.UseGameStoreSwagger();
