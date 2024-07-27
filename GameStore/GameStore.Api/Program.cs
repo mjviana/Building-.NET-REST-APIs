@@ -68,11 +68,7 @@ builder.Services.AddSingleton<IImageUploader>(
     )
 );
 
-builder.Services.AddAntiforgery();
-
 var app = builder.Build();
-
-app.UseAntiforgery();
 
 app.UseExceptionHandler(exceptionHandlerApp => exceptionHandlerApp.ConfigureExceptionHandler());
 app.UseMiddleware<RequestTimingMiddleware>();
