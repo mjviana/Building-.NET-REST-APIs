@@ -8,7 +8,6 @@ using GameStore.Api.ImageUpload;
 using GameStore.Api.Middleware;
 using GameStore.Api.OpenApi;
 using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,6 +41,8 @@ builder.Services.AddSingleton<IImageUploader>(
         )
     )
 );
+
+builder.Logging.AddAzureWebAppDiagnostics();
 
 var app = builder.Build();
 
