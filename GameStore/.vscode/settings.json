@@ -1,3 +1,6 @@
 {
-	"cSpell.words": ["Dtos", "jwts", "sqlpreview", "sqlvolume"]
+	"cSpell.words": ["Dtos", "jwts", "sqlpreview", "sqlvolume"],
+	"appService.preDeployTask": "publish-release",
+	"appService.deploySubpath": "GameStore.Api/bin/Release/net8.0/publish",
+	"appService.defaultWebAppToDeploy": "/subscriptions/f9d6ca09-5eb8-4304-b7d4-8881ba1841bc/resourceGroups/gamestore/providers/Microsoft.Web/sites/gamestore01"
 }
